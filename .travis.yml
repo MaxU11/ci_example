@@ -2,13 +2,9 @@ os: linux
   
 language: go
 
-install: travis_install_go_dependencies
-
 go:
   - 1.13.x
-  - master
 
 script:
   - go test -v ./...
   - CGO_ENABLED=0 go build -o demo
-  
