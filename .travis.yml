@@ -1,6 +1,6 @@
 os: linux
   
-language: go
+language: minimal
 
 go:
   - 1.13.x
