@@ -3,7 +3,7 @@ os: linux
 language: go
 
 go:
-  - 1.13.x
+  - 1.10.x
 
 script:   
   # Test the code
