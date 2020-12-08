@@ -4,8 +4,16 @@ language: go
 
 go: 1.13.x
 
-script:   
-# Test the code
+script:
 - go test -v ./...
-# Build the code 
-- CGO_ENABLED=0 GOARCH=amd64 go build -o demo
+- CGO_ENABLED=0 go build -o demo
+
+- echo "$REGISTRY_PASSWORD" | docker login --username $REGISTRY_USER --password-stdin
+- docker build -f Dockerfile -t maexdock/demo:latest ./
+- GIT_SHA="$(git rev-parse --short HEAD)"
+- docker tag maexdock/demo:latest maexdock/demo:$GIT_SHA
+- docker push maexdock/demo:latest
+- docker push maexdock/demo:$GIT_SHA
+
+services:
+- docker
